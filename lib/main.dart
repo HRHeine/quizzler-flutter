@@ -25,6 +25,23 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+
+  List<Widget> scoreKeeper = [
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,45 +69,59 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                ),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+              ),
               onPressed: () {
                 //The user picked true.
                 print("User selected true");
-                },
+                setState(() {
+                  //The user picked true.
+                  //print("User selected true");
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                  );
+                });
+
+              },
               child: Text(
                 'True',
                 style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                  ),
+                  color: Colors.white,
+                  fontSize: 20.0,
                 ),
+              ),
             ),
           ),
-          //TODO: Add a Row here as your score keeper
         ),
-            Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: TextButton(
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                    ),
-                    onPressed: () {
-                      //The user picked false.
-                      print("User selected false");
-                    },
-                    child: Text(
-                      'False',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              ),
+              onPressed: () {
+                //The user picked false.
+                print("User selected false");
+              },
+              child: Text(
+                'False',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
                 ),
-              //TODO: Add a Row here as your score keeper
+              ),
             ),
+          ),
+        ),
+        //TODO: Add a Row here as your score keeper
+
+        Row(
+          children: scoreKeeper,
+        )
       ],
     );
   }
